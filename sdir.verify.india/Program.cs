@@ -9,10 +9,19 @@ namespace sdir.verify.india
     {
         static void Main(string[] args)
         {
+            VerifyIndiaNow();
+
+        }
+
+
+
+
+        public static void VerifyIndiaNow()
+        {
             string url = @"C:\Users\helge\source\repos\sdir.verify.india\testdata\india.html";
             string html = File.ReadAllText(url);
 
-            var verify =  ParseData(html);
+            var verify = ParseData(html);
 
             Console.WriteLine("Name of  Seafarer: " + verify.Name);
             Console.WriteLine("Date of Birth:" + verify.DateOfBirth);
@@ -29,7 +38,6 @@ namespace sdir.verify.india
             Console.WriteLine("Verified :" + verify.Verified);
             Console.WriteLine("Status :" + verify.Status);
         }
-
 
 
         public static VerifyIndia ParseData(string html)
@@ -55,7 +63,6 @@ namespace sdir.verify.india
                     }
                     if (cols.Any(x => x.InnerText.Contains("Date of Birth", StringComparison.InvariantCultureIgnoreCase)))
                     {
-
                         if (DateTime.TryParse(cols.Skip(1).FirstOrDefault()?.InnerText, out parsedDate))
                         {
                             verify.DateOfBirth = parsedDate;
@@ -67,7 +74,6 @@ namespace sdir.verify.india
                     }
                 }
             }
-
 
          
             var certificateData = tables?
