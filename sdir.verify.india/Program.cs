@@ -48,22 +48,22 @@ namespace sdir.verify.india
             {
                 foreach (var row in seafarerDetails)
                 {
-                    var cols1 = row.Descendants("td");
-                    if (cols1.Any(x => x.InnerText.Contains("Name of  Seafarer", StringComparison.InvariantCultureIgnoreCase)))
+                    var cols = row.Descendants("td");
+                    if (cols.Any(x => x.InnerText.Contains("Name of  Seafarer", StringComparison.InvariantCultureIgnoreCase)))
                     {
-                        verify.Name = cols1.Skip(1).FirstOrDefault()?.InnerText.Clean();
+                        verify.Name = cols.Skip(1).FirstOrDefault()?.InnerText.Clean();
                     }
-                    if (cols1.Any(x => x.InnerText.Contains("Date of Birth", StringComparison.InvariantCultureIgnoreCase)))
+                    if (cols.Any(x => x.InnerText.Contains("Date of Birth", StringComparison.InvariantCultureIgnoreCase)))
                     {
 
-                        if (DateTime.TryParse(cols1.Skip(1).FirstOrDefault()?.InnerText, out parsedDate))
+                        if (DateTime.TryParse(cols.Skip(1).FirstOrDefault()?.InnerText, out parsedDate))
                         {
                             verify.DateOfBirth = parsedDate;
                         }
                     }
-                    if (cols1.Any(x => x.InnerText.Contains("INDoS No.", StringComparison.InvariantCultureIgnoreCase)))
+                    if (cols.Any(x => x.InnerText.Contains("INDoS No.", StringComparison.InvariantCultureIgnoreCase)))
                     {
-                        verify.INDoSNo = cols1.Skip(1).FirstOrDefault()?.InnerText.Clean();
+                        verify.INDoSNo = cols.Skip(1).FirstOrDefault()?.InnerText.Clean();
                     }
                 }
             }
